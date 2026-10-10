@@ -1,6 +1,6 @@
 # Fountain Cascade Specification
 
-**Version:** 0.2 (draft)
+**Version:** 0.3 (draft)
 **Date:** 2026-10-10
 **Extends:** Fountain 1.1 (https://fountain.io/syntax)
 
@@ -50,7 +50,7 @@ Cascade carries most of its information in Fountain notes with a defined shape.
 [[key: value | key: value]]
 ```
 
-4.2. The first key is the note's **type**. This specification defines the types `id`, `goal`, `status`, and `beat`.
+4.2. The first key is the note's **type**. This specification defines the types `id`, `resume`, `stage`, `goal`, `status`, and `beat`.
 
 4.3. Keys are lowercase letters, digits, and hyphens. Whitespace around keys, values, and `|` is ignored.
 
@@ -78,17 +78,31 @@ Cascade describes a script in two independent ways.
 
 5.3. An **agent** is anyone or anything that wants something and can act to get it. What it is does not matter: a person, a ghost, a machine, an animal, or a storm can be an agent if the story gives it a will. The writer decides.
 
-5.4. A **goal** is something an agent wants to bring about over a stretch of story. A goal has a subject (the agent who wants it) and usually an object (the agent or thing it is aimed at). An agent may hold several goals at once, and one goal may serve another.
+5.4. A **goal** is something an agent wants to bring about over a stretch of story. A goal has a subject (the agent who wants it) and usually an object (the agent or thing it is aimed at). An agent may hold several goals at once.
+
+5.4a. Goals form a **tree**. A goal may serve another goal: he wins her over to find the bombs, and finds the bombs to stop the villain. A goal that serves no other is a **top-level goal**. A story usually creates its top-level goals early, and each later stretch pursues smaller goals in their service.
+
+5.4b. A goal may **grow out of** another. If the earlier goal stays live, the new one has been *raised* from it: he was using her, and now he loves her. If the earlier goal is abandoned, the new one has *replaced* it.
 
 5.5. Every goal has a **status** at every point in the script. A goal may be `secret` (hidden from its object) or `active` (known to its object and being pursued). It ends as `won`, `lost`, or `abandoned`.
 
 5.6. A **sequence** is a stretch of story about agents and their goals. It is either a conflict between two goals or the creation of a goal. A goal is not bound to one sequence: it may be created in one, stay secret through another, and be fought over in a third.
+
+5.6a. A sequence may **pause** while another sequence plays, and **resume** afterwards.
+
+5.6b. Agents may enter or leave during a sequence. An entrance does not end the sequence, though it may change the goals in play.
+
+5.6c. A sequence often ends when a goal it is about is won or lost, while the goal above it in the tree lives on and gives rise to the next sequence. This is a tendency, not a rule.
 
 5.7. A **beat** is a stretch of a sequence in which the balance of power between the agents, and what each is trying to do at that moment, stay the same. A new beat begins where the power shifts or an agent's objective changes.
 
 5.8. An **objective** is what an agent is trying to do right now in service of a goal. A **tactic** is how the agent goes about it. A change of tactic alone does not begin a beat. A tactic that succeeds does, because it shifts the power.
 
 5.9. Without agents there is no drama. A passage with no agents, such as an establishing shot, belongs to no beat.
+
+5.10. A **spine** (or story arc) is a named, ordered list of **stages**, such as the Hero's Journey. A stage is a plot point the story is expected to reach: a goal being created, prepared for, fought over, raised, or resolved. A spine is a pattern laid over the goals, sequences, and beats, not a separate structure.
+
+5.11. The dramatic cut does not depend on script text. A file holding only sequences, goals, statuses, beats, and stages is a complete plot, and scenes may be written beneath its beats later.
 
 ## 6. Structure levels
 
@@ -118,6 +132,30 @@ Here `#` sections are acts and `##` sections are sequences.
 
 7.4. A synopsis (`=`) that follows the section line, with only blank lines and Cascade notes between them, is the sequence's summary. The synopsis MUST have a blank line before and after it.
 
+7.5. A later section MAY continue an earlier sequence. It does so with a structured note of type `resume`, naming the earlier sequence's ID, in the first paragraph after its section line, in place of an `id` note:
+
+```
+## Suzie Plays for Cash
+
+[[id: q3]]
+
+...
+
+## Durand's Scheme
+
+[[id: q4]]
+
+...
+
+## Suzie Plays for Cash
+
+[[resume: q3]]
+```
+
+7.6. A resuming section is not a new sequence. It is a further stretch of the sequence it names, and it has no ID of its own. Its label SHOULD repeat the label of the sequence it resumes.
+
+7.7. A `resume` note MUST name a sequence that begins earlier in the file. A sequence MAY be resumed more than once.
+
 ## 8. Goals
 
 8.1. A goal is declared by a structured note of type `goal`. The value is the want, written as a short verb phrase:
@@ -139,7 +177,8 @@ Each reads as a sentence: WIFE wants to divorce HUSBAND.
 | `id` | yes | The goal's ID (section 10). |
 | `subject` | yes | The agent who holds the goal. Agents who share a goal are listed with commas. |
 | `object` | no | The agent or thing the goal is aimed at. |
-| `for` | no | The ID of another goal that this goal serves. |
+| `for` | no | The ID of the goal this goal serves: its parent in the goal tree. A goal with no `for` is a top-level goal. |
+| `from` | no | The ID of the goal this goal grew out of (5.4b). |
 | `status` | no | `secret` or `active`. If absent, the goal is `active`. |
 
 8.3. An agent that appears as a character SHOULD be named as in its character cues, in capitals, so tools can match the goal to the character. Any other subject or object is free text.
@@ -149,6 +188,18 @@ Each reads as a sentence: WIFE wants to divorce HUSBAND.
 8.5. A goal is live from its declaration until it is won, lost, or abandoned. It is not ended by a scene heading or by the end of a sequence.
 
 8.6. The `for` field records that one goal exists because of another. In 8.1, WIFE wants the divorce because she wants to be exclusive with GIRLFRIEND.
+
+8.6a. The `from` field records that a goal grew out of another. Whether it was raised or has replaced the earlier goal is shown by the earlier goal's status:
+
+```
+[[goal: use | id: use-marion | subject: INDY | object: MARION | for: ark]]
+
+[[goal: love | id: love-marion | subject: INDY | object: MARION | from: use-marion]]
+```
+
+Here the new goal has no `for`, so it stands at the top level beside the goal the old one served.
+
+8.6b. `for` and `from` MUST each name a goal declared earlier in the file. `for` links MUST NOT form a loop.
 
 8.7. A change of status is recorded by a structured note of type `status`, placed at the point in the script where it happens. The value is the new status and the `goal` field names the goal:
 
@@ -208,15 +259,60 @@ She puts in her key.
 
 9.7. A beat note MAY carry an `ahead` field naming the agent who holds the upper hand during the beat.
 
-## 10. Stable IDs
+9.8. A beat needs no script text beneath it. In a plot written before its script, a beat note may be followed directly by the next note.
+
+## 10. Spines and stages
+
+10.1. A script names the spines it follows with the title-page key `Spine`, as one or more spine IDs separated by commas:
+
+```
+Spine: heros-journey
+```
+
+10.2. A spine ID and a stage ID follow the rule for IDs (11.1), but stage IDs are not script IDs: they need not be unique against the IDs in the file, and one stage may be attached in more than one place.
+
+10.3. This specification's repository publishes a library of spines in its `spines` directory. Each lists its stages in order, with an ID, a name, and a description of the stage in terms of goals. A tool SHOULD ship with that library.
+
+10.4. A script MAY define a spine of its own in the title page. The value `custom` is followed by indented lines, each giving a stage ID and its name, in order:
+
+```
+Spine: custom
+    setup: The Marriage She Performs
+    rupture: Not Until You're Divorced
+    descent: Every Door in the House
+```
+
+10.5. A stage is attached to a sequence by a structured note of type `stage`, placed after the sequence's section line and before its first beat or script text:
+
+```
+## The Briefing
+
+[[id: q2]]
+
+[[stage: meeting-the-mentor]]
+```
+
+10.6. A stage is attached to a beat by a `stage` field in the beat note:
+
+```
+[[beat: He cannot fire with her standing there | stage: ordeal]]
+```
+
+10.7. When a script names more than one spine, a stage is written with its spine: `[[stage: heros-journey/ordeal]]`. With one spine, the spine MAY be left out.
+
+10.8. Stages attach to sequences and beats. They do not run from one marker to the next, so stages MAY overlap, repeat, or appear out of order, and a stage MAY be left unattached. A tool MAY report stages that are missing or out of order. It MUST NOT treat them as errors.
+
+10.9. A `stage` note that names a stage not found in the script's spines has no Cascade meaning. A tool SHOULD report it.
+
+## 11. Stable IDs
 
 IDs let tools refer to a part of the script in a way that survives edits and reordering.
 
-10.1. An ID is 1 to 32 characters from lowercase letters, digits, and hyphens.
+11.1. An ID is 1 to 32 characters from lowercase letters, digits, and hyphens.
 
-10.2. An ID MUST be unique within the file. An ID that has been removed SHOULD NOT be reused.
+11.2. An ID MUST be unique within the file. An ID that has been removed SHOULD NOT be reused.
 
-10.3. A sequence or scene is given an ID by a structured note of type `id` in the first paragraph after its section line or scene heading:
+11.3. A sequence or scene is given an ID by a structured note of type `id` in the first paragraph after its section line or scene heading:
 
 ```
 ## The Divorce
@@ -232,23 +328,25 @@ EXT. DRIVEWAY - DAY
 [[id: s31]]
 ```
 
-10.4. A beat or goal is given an ID by an `id` field in its own note.
+11.4. A beat or goal is given an ID by an `id` field in its own note.
 
-10.5. IDs on sequences, scenes, and beats are optional in hand-written files. A goal MUST have an ID, because status notes and other goals refer to it. A goal's ID MAY be a plain word, such as `divorce`. A tool that needs an ID for an element that has none SHOULD assign one and write it to the file.
+11.5. IDs on sequences, scenes, and beats are optional in hand-written files. A sequence that is resumed MUST have one. A goal MUST have an ID, because status notes and other goals refer to it. A goal's ID MAY be a plain word, such as `divorce`. A tool that needs an ID for an element that has none SHOULD assign one and write it to the file.
 
-10.6. IDs are not scene numbers. Fountain scene numbers (`#12#`) remain display numbers and MAY change between drafts. IDs do not change.
+11.6. IDs are not scene numbers. Fountain scene numbers (`#12#`) remain display numbers and MAY change between drafts. IDs do not change.
 
-## 11. Changes from v0.1
+## 12. Changes from earlier versions
 
-11.1. In v0.1 a beat ended at the next scene heading. From v0.2 it does not (9.2, 9.3). A v0.1 file read under v0.2 has the same beats, but each may now extend past the end of its scene.
+12.1. From v0.2 to v0.3: sequences may pause and resume (7.5); goals form a tree through `for` and may grow out of one another through `from` (8.6a); spines and stages are added (section 10); a plot may be written with no script text (5.11, 9.8). Every v0.2 file is a valid v0.3 file with the same meaning.
 
-11.2. In v0.1 a beat was undefined. Section 5 now defines it.
+12.2. From v0.1 to v0.2: a beat no longer ends at the next scene heading (9.2, 9.3), and section 5 defines the terms. A v0.1 file read under a later version has the same beats, but each may extend past the end of its scene.
 
-## 12. Open questions
+## 13. Open questions
 
 These are undecided and feedback is welcome.
 
-- **Sequence kinds.** Whether a sequence should record that it is a conflict or the creation of a goal, or whether tools should work that out from its goals.
+- **Sequence kinds.** Whether a sequence should record that it is a conflict, a preparation, or the creation of a goal, or whether tools should work that out from its goals.
+- **Setup and payoff.** A preparation plants things that pay off later (a gadget, a promise, a line). There is no way to connect the two moments.
+- **Want and need.** A goal is what an agent pursues. What they lack without knowing it is not a goal and has no place yet.
 - **Goals that begin before the script does.** A goal is declared where it is created (8.4), but some are already held when the story opens. The example declares such a goal where its holder first comes into play.
 - **Which goal a beat belongs to.** When an agent holds several goals, a beat does not say which one is in play.
 - **Beats that turn mid-element.** A turn that happens halfway through a speech or paragraph can only be marked at the next element (9.4).
