@@ -1,30 +1,6 @@
 # Roadmap
 
-This records what is planned after v0.2 and the design decisions already made, so they are not lost between versions. Nothing here is final until it appears in SPEC.md.
-
-## v0.3: Story spines
-
-A spine is a named, ordered list of stages that parts of a script attach to. The Hero's Journey is one example.
-
-Decisions so far:
-
-- **Spine definitions live outside the script.** This repository will carry a small library of standard spines (Hero's Journey, Save the Cat, three-act, the Kenn Adams story spine).
-- **A script names its spine in the title page:** `Spine: heros-journey`.
-- **A custom spine is defined in the title page** using indented multi-line values:
-
-  ```
-  Spine: custom
-      setup: The Marriage She Performs
-      rupture: Not Until You're Divorced
-  ```
-
-- **Stages attach by structured note** at the sequence, scene, or beat level: `[[stage: ordinary-world]]`, or as a field in a beat note: `[[beat: The letter arrives | stage: call-to-adventure]]`.
-- **Stages attach to units; they do not run until the next marker.** This allows overlap and out-of-order stages.
-- **Each stage has** an ID, a display name, and optionally a description and an expected position in the script.
-
-Undecided:
-
-- Whether a script may use more than one spine, with stages written `[[stage: heros-journey/ordeal]]`.
+This records what is planned after v0.3 and the design decisions already made, so they are not lost between versions. Nothing here is final until it appears in SPEC.md.
 
 ## v0.4: Alternatives
 
@@ -62,8 +38,12 @@ Undecided:
 
 ## Later
 
+- **More spines:** Save the Cat, three-act structure, and the Kenn Adams story spine, each described in goal terms like the Hero's Journey.
+- **Setup and payoff:** connecting something planted in a preparation to the moment it pays off.
+- **Want and need:** a place for what a character lacks without knowing it, beside the goals they pursue.
+- **Sequence kinds:** whether a sequence records that it is a conflict, a preparation, or the creation of a goal.
 - **Structural proposals:** suggesting a moved scene, a cut sequence, or a split beat. Alternatives cannot express these.
-- **An AI beat agent:** a tool that reads a whole script, works out its agents, goals, and shifts of power, and proposes sequences and beats for the writer to accept or reject. Being built in FountainPen.
+- **Tools:** FountainPen's beat agent reads a script and proposes goals, sequences, and beats. A plot view for planning with stages and goals before any script exists is next.
 
 ## Dropped
 
