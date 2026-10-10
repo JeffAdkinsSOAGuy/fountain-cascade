@@ -9,7 +9,9 @@ Changes from testing v0.1 against a full-length screenplay.
 - Added: Fountain 1.1 named as the sole authority on Fountain syntax.
 - Added: an informative section on the Fountain rules Cascade relies on, and an informative Fountain quick reference.
 - Added: beats begin between elements.
-- Updated: the sample file and README example.
+- Replaced the invented sample with `moral-dilemma.fountain`, a produced short film marked up in full.
+- Updated: the README example.
+- License: the example screenplay is excluded from CC BY 4.0.
 - Open questions extended with the gaps the test exposed.
 
 ## v0.1-draft (2026-10-10)
