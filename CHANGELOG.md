@@ -11,7 +11,7 @@ Sequences and beats are now defined by drama, not by scene headings.
 - Changed: a beat runs until the next beat or the end of the sequence. A scene heading no longer ends a beat.
 - Added: the optional `ahead` field on beats.
 - Changed: a sequence is a conflict between two goals or the creation of a goal.
-- Not yet updated: `moral-dilemma.fountain` still carries v0.1 markup.
+- Updated: `moral-dilemma.fountain` is re-marked under v0.2, with 8 goals and 22 beats in 5 sequences. Sequence q2 and 25 beat IDs from the v0.1 markup are retired, not reused.
 
 ## v0.1.1-draft (2026-10-10)
 

@@ -249,6 +249,7 @@ EXT. DRIVEWAY - DAY
 These are undecided and feedback is welcome.
 
 - **Sequence kinds.** Whether a sequence should record that it is a conflict or the creation of a goal, or whether tools should work that out from its goals.
+- **Goals that begin before the script does.** A goal is declared where it is created (8.4), but some are already held when the story opens. The example declares such a goal where its holder first comes into play.
 - **Which goal a beat belongs to.** When an agent holds several goals, a beat does not say which one is in play.
 - **Beats that turn mid-element.** A turn that happens halfway through a speech or paragraph can only be marked at the next element (9.4).
 - **Layers.** Beats form a single line through a sequence and cannot say that a beat belongs to a frame story or a second point of view.

@@ -57,7 +57,7 @@ I want a divorce.
 
 Each Cascade note stands as its own paragraph, with a blank line above and below, so that Fountain's own rules for scene headings and dialogue are never disturbed.
 
-See [SPEC.md](SPEC.md) for the full draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade (currently with v0.1 markup: sequences and beats, no goals yet), and [ROADMAP.md](ROADMAP.md) for what comes next.
+See [SPEC.md](SPEC.md) for the full draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade, and [ROADMAP.md](ROADMAP.md) for what comes next.
 
 ## Implementations
 
