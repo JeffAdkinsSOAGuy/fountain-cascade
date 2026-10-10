@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.3-draft (2026-10-10)
+
+Story arcs, and a goal model deep enough to plan a plot before writing it.
+
+- Added: spines and stages. The `Spine` title-page key names a story arc, and `stage` attaches one of its stages to a sequence or a beat. A script may define a custom spine.
+- Added: the first library spine, the Hero's Journey, with each stage described in terms of goals.
+- Added: `resume`, so a sequence can pause while another plays and then continue.
+- Added: the goal tree. `for` names the goal a goal serves; a goal with none is top-level.
+- Added: `from`, for a goal raised out of another, or replacing an abandoned one.
+- Added: a plot may be written with no script text.
+- Clarified: agents may enter or leave during a sequence; a sequence often, but not always, ends when its goal is won or lost.
+- Updated: `moral-dilemma.fountain` pauses one sequence for another and resumes it, and links its goals into a tree.
+- Every v0.2 file is a valid v0.3 file with the same meaning.
+
 ## v0.2-draft (2026-10-10)
 
 Sequences and beats are now defined by drama, not by scene headings.
