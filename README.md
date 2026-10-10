@@ -2,19 +2,20 @@
 
 Fountain Cascade is an extension of the [Fountain](https://fountain.io) screenplay syntax. It adds story structure above and below the scene, and (in later versions) a way for co-writers, including AI, to propose alternatives without overwriting the writer's text.
 
-**Status:** v0.1.1 draft. Expect changes.
+**Status:** v0.2 draft. Expect changes.
 
 ## What it adds
 
-Fountain describes a script as scenes made of lines (action, dialogue, and so on). Cascade adds:
+Fountain describes a script as scenes made of lines (action, dialogue, and so on). A scene is a unit of place and time. Cascade adds the drama that runs through and across scenes:
 
-| Layer | Where it sits | Version |
+| Layer | What it is | Version |
 |---|---|---|
-| Sequence | Groups scenes | v0.1 |
-| Beat | Divides a scene | v0.1 |
-| Stable IDs | On sequences, scenes, and beats | v0.1 |
-| Story spine | An ordered template of stages (e.g. the Hero's Journey) that parts of the script attach to | v0.2 |
-| Alternatives | Proposed replacement text beside the original, with an author | v0.3 |
+| Goal | What an agent wants, with a subject, an object, and a status that changes through the script | v0.2 |
+| Sequence | A stretch of story that is a conflict between two goals or the creation of a goal | v0.1, redefined in v0.2 |
+| Beat | A stretch in which the balance of power and the agents' objectives stay the same. Beats may cross scene headings. | v0.1, redefined in v0.2 |
+| Stable IDs | On sequences, scenes, beats, and goals | v0.1 |
+| Story spine | An ordered template of stages (e.g. the Hero's Journey) that parts of the script attach to | planned, v0.3 |
+| Alternatives | Proposed replacement text beside the original, with an author | planned, v0.4 |
 
 ## Relationship to Fountain
 
@@ -30,28 +31,33 @@ Cascade keeps the `.fountain` extension and uses only constructs that existing F
 
 ```
 Title: Example
-Structure: act, sequence
+Structure: sequence
 
-# Act One
+# The Dinner
 
-## The Arrival
+[[id: q2]]
 
-[[id: q1]]
+INT. DINING ROOM - NIGHT
 
-INT. KITCHEN - DAY
+[[id: s4]]
 
-[[id: s1]]
+[[beat: A nice dinner]]
 
-Boxes everywhere.
+She pours him a second glass.
 
-[[beat: Mara pretends she already knew | id: b1]]
+[[beat: She says it | ahead: WIFE]]
 
-Mara sets down her bag. Smiles too quickly.
+[[status: active | goal: divorce]]
+
+[[goal: protect | id: reputation | subject: HUSBAND | object: his reputation]]
+
+WIFE
+I want a divorce.
 ```
 
 Each Cascade note stands as its own paragraph, with a blank line above and below, so that Fountain's own rules for scene headings and dialogue are never disturbed.
 
-See [SPEC.md](SPEC.md) for the full v0.1 draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade, and [ROADMAP.md](ROADMAP.md) for what comes next.
+See [SPEC.md](SPEC.md) for the full draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade (currently with v0.1 markup: sequences and beats, no goals yet), and [ROADMAP.md](ROADMAP.md) for what comes next.
 
 ## Implementations
 

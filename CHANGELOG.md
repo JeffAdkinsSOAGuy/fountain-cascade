@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.2-draft (2026-10-10)
+
+Sequences and beats are now defined by drama, not by scene headings.
+
+- Added: the dramatic model. Scenes are physical units; sequences and beats are dramatic units.
+- Added: definitions of agent, goal, status, sequence, beat, objective, and tactic.
+- Added: `goal` notes with `subject`, `object`, `for`, and `status`.
+- Added: `status` notes. A goal is `secret` (hidden from its object) or `active`, and ends `won`, `lost`, or `abandoned`.
+- Changed: a beat runs until the next beat or the end of the sequence. A scene heading no longer ends a beat.
+- Added: the optional `ahead` field on beats.
+- Changed: a sequence is a conflict between two goals or the creation of a goal.
+- Not yet updated: `moral-dilemma.fountain` still carries v0.1 markup.
+
 ## v0.1.1-draft (2026-10-10)
 
 Changes from testing v0.1 against a full-length screenplay.
