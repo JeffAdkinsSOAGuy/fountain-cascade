@@ -1,6 +1,6 @@
 # Fountain Cascade Specification
 
-**Version:** 0.1.1 (draft)
+**Version:** 0.2 (draft)
 **Date:** 2026-10-10
 **Extends:** Fountain 1.1 (https://fountain.io/syntax)
 
@@ -50,7 +50,7 @@ Cascade carries most of its information in Fountain notes with a defined shape.
 [[key: value | key: value]]
 ```
 
-4.2. The first key is the note's **type** (for example `beat` or `id`).
+4.2. The first key is the note's **type**. This specification defines the types `id`, `goal`, `status`, and `beat`.
 
 4.3. Keys are lowercase letters, digits, and hyphens. Whitespace around keys, values, and `|` is ignored.
 
@@ -68,11 +68,33 @@ Cascade carries most of its information in Fountain notes with a defined shape.
 
 4.8. Rule 4.7 applies everywhere, including directly after a section line or scene heading and directly before a character cue.
 
-## 5. Structure levels
+## 5. The dramatic model
+
+Cascade describes a script in two independent ways.
+
+5.1. **The physical cut.** A scene is a unit of place and time, opened by a Fountain scene heading. Scenes exist for production. They carry no dramatic meaning in Cascade.
+
+5.2. **The dramatic cut.** Sequences and beats are units of drama. They are defined by what agents want and who holds power, and they are free to cross scene headings.
+
+5.3. An **agent** is anyone or anything that wants something and can act to get it. What it is does not matter: a person, a ghost, a machine, an animal, or a storm can be an agent if the story gives it a will. The writer decides.
+
+5.4. A **goal** is something an agent wants to bring about over a stretch of story. A goal has a subject (the agent who wants it) and usually an object (the agent or thing it is aimed at). An agent may hold several goals at once, and one goal may serve another.
+
+5.5. Every goal has a **status** at every point in the script. A goal may be `secret` (hidden from its object) or `active` (known to its object and being pursued). It ends as `won`, `lost`, or `abandoned`.
+
+5.6. A **sequence** is a stretch of story about agents and their goals. It is either a conflict between two goals or the creation of a goal. A goal is not bound to one sequence: it may be created in one, stay secret through another, and be fought over in a third.
+
+5.7. A **beat** is a stretch of a sequence in which the balance of power between the agents, and what each is trying to do at that moment, stay the same. A new beat begins where the power shifts or an agent's objective changes.
+
+5.8. An **objective** is what an agent is trying to do right now in service of a goal. A **tactic** is how the agent goes about it. A change of tactic alone does not begin a beat. A tactic that succeeds does, because it shifts the power.
+
+5.9. Without agents there is no drama. A passage with no agents, such as an establishing shot, belongs to no beat.
+
+## 6. Structure levels
 
 Fountain sections (`#`, `##`, ...) group scenes but carry no meaning. Cascade lets a script declare what each depth is.
 
-5.1. The title-page key `Structure` lists level names from depth 1 downward, separated by commas:
+6.1. The title-page key `Structure` lists level names from depth 1 downward, separated by commas:
 
 ```
 Structure: act, sequence
@@ -80,97 +102,158 @@ Structure: act, sequence
 
 Here `#` sections are acts and `##` sections are sequences.
 
-5.2. The level names `act` and `sequence` are reserved with their usual screenwriting meaning. Other names MAY be used (for example `part` or `episode`).
+6.2. The level names `act` and `sequence` are reserved. Other names MAY be used (for example `part` or `episode`).
 
-5.3. Section depths beyond those listed have no Cascade meaning.
+6.3. Section depths beyond those listed have no Cascade meaning.
 
-5.4. If `Structure` is absent, sections have no Cascade meaning.
+6.4. If `Structure` is absent, sections have no Cascade meaning.
 
-## 6. Sequences
+## 7. Sequences
 
-6.1. A sequence is a section at the depth named `sequence` in the `Structure` key.
+7.1. A sequence is a section at the depth named `sequence` in the `Structure` key. The text of the section line is the sequence's label.
 
-6.2. A sequence contains every scene from its section line up to the next section of the same or shallower depth.
+7.2. A sequence runs from its section line up to the next section of the same or shallower depth.
 
-6.3. A section line MUST have a blank line before and after it.
+7.3. A section line MUST have a blank line before and after it.
 
-6.4. A synopsis (`=`) that follows the section line, with only blank lines and an `id` note between them, is the sequence's summary. The synopsis MUST have a blank line before and after it.
+7.4. A synopsis (`=`) that follows the section line, with only blank lines and Cascade notes between them, is the sequence's summary. The synopsis MUST have a blank line before and after it.
 
-```
-## The Arrival
+## 8. Goals
 
-= Mara returns home and finds the house sold.
-
-```
-
-## 7. Beats
-
-A beat is a unit of story inside a scene.
-
-7.1. A beat is marked by a structured note of type `beat`. The value is a short description of the beat:
+8.1. A goal is declared by a structured note of type `goal`. The value is the want, written as a short verb phrase:
 
 ```
-[[beat: Mara pretends she already knew]]
+[[goal: be exclusive with | id: exclusive | subject: WIFE | object: GIRLFRIEND]]
 
-Mara sets down her bag. Smiles too quickly.
+[[goal: divorce | id: divorce | subject: WIFE | object: HUSBAND | for: exclusive | status: secret]]
+
+[[goal: protect | id: reputation | subject: HUSBAND | object: his reputation]]
 ```
 
-7.2. A beat begins at its note and ends at the next beat note, scene heading, or section, whichever comes first.
+Each reads as a sentence: WIFE wants to divorce HUSBAND.
 
-7.3. A beat begins between elements. It cannot begin inside an action paragraph or inside a dialogue block.
+8.2. A goal note has these fields:
 
-7.4. Content between a scene heading and the scene's first beat note belongs to the scene but to no beat.
+| Field | Required | Meaning |
+|---|---|---|
+| `id` | yes | The goal's ID (section 10). |
+| `subject` | yes | The agent who holds the goal. Agents who share a goal are listed with commas. |
+| `object` | no | The agent or thing the goal is aimed at. |
+| `for` | no | The ID of another goal that this goal serves. |
+| `status` | no | `secret` or `active`. If absent, the goal is `active`. |
 
-7.5. Beats do not nest.
+8.3. An agent that appears as a character SHOULD be named as in its character cues, in capitals, so tools can match the goal to the character. Any other subject or object is free text.
 
-7.6. A scene MAY have no beats.
+8.4. A goal is declared once, at the point in the script where it is created. A goal note MAY appear anywhere in a sequence.
 
-## 8. Stable IDs
+8.5. A goal is live from its declaration until it is won, lost, or abandoned. It is not ended by a scene heading or by the end of a sequence.
 
-IDs let tools refer to a part of the script in a way that survives edits and reordering. Later versions of this specification depend on them.
+8.6. The `for` field records that one goal exists because of another. In 8.1, WIFE wants the divorce because she wants to be exclusive with GIRLFRIEND.
 
-8.1. An ID is 1 to 32 characters from lowercase letters, digits, and hyphens.
-
-8.2. An ID MUST be unique within the file. An ID that has been removed SHOULD NOT be reused.
-
-8.3. A sequence or scene is given an ID by a structured note of type `id` in the first paragraph after its section line or scene heading. For a sequence with a synopsis, the `id` note comes before the synopsis:
-
-```
-## The Arrival
-
-[[id: q1]]
-
-= Mara returns home and finds the house sold.
-
-INT. KITCHEN - DAY
-
-[[id: s1]]
-
-Boxes everywhere.
-```
-
-8.4. A beat is given an ID by an `id` field in its beat note:
+8.7. A change of status is recorded by a structured note of type `status`, placed at the point in the script where it happens. The value is the new status and the `goal` field names the goal:
 
 ```
-[[beat: Mara pretends she already knew | id: b1]]
+[[beat: She says it]]
+
+[[status: active | goal: divorce]]
+
+[[goal: protect | id: reputation | subject: HUSBAND | object: his reputation]]
 ```
 
-8.5. IDs are optional in hand-written files. A tool that needs an ID for an element that has none SHOULD assign one and write it to the file.
+Here her secret goal comes into the open, and that creates his.
 
-8.6. IDs are not scene numbers. Fountain scene numbers (`#12#`) remain display numbers and MAY change between drafts. IDs do not change.
+8.8. A `secret` goal is hidden from its object. Other agents, and the audience, may know of it. `secret` therefore applies only to a goal whose object is an agent.
 
-## 9. Open questions
+8.9. The statuses are `secret`, `active`, `won`, `lost`, and `abandoned`. After `won`, `lost`, or `abandoned`, a goal is closed and MUST NOT change status again.
+
+8.10. A status note MUST come after the declaration of the goal it names.
+
+## 9. Beats
+
+9.1. A beat is marked by a structured note of type `beat`. The value is a short description of the beat:
+
+```
+[[beat: He shuts her out so she can't say it]]
+
+He runs into the house and locks the door.
+```
+
+9.2. A beat begins at its note. It ends at the next beat note or at the end of the sequence, whichever comes first. In a script with no sequences, it ends at the next beat note or the end of the file.
+
+9.3. A scene heading does not end a beat. A beat MAY run through any number of scenes:
+
+```
+EXT. DRIVEWAY - DAY
+
+[[beat: He shuts her out so she can't say it]]
+
+He runs into the house and locks the door.
+
+INT. HOUSE - CONTINUOUS
+
+He runs to the bedroom. Locks the door.
+
+EXT. DRIVEWAY - CONTINUOUS
+
+[[beat: She gets through | ahead: WIFE]]
+
+She puts in her key.
+```
+
+9.4. A beat begins between elements. It cannot begin inside an action paragraph or inside a dialogue block.
+
+9.5. Content between the start of a sequence and its first beat note belongs to no beat.
+
+9.6. Beats do not nest.
+
+9.7. A beat note MAY carry an `ahead` field naming the agent who holds the upper hand during the beat.
+
+## 10. Stable IDs
+
+IDs let tools refer to a part of the script in a way that survives edits and reordering.
+
+10.1. An ID is 1 to 32 characters from lowercase letters, digits, and hyphens.
+
+10.2. An ID MUST be unique within the file. An ID that has been removed SHOULD NOT be reused.
+
+10.3. A sequence or scene is given an ID by a structured note of type `id` in the first paragraph after its section line or scene heading:
+
+```
+## The Divorce
+
+[[id: q7]]
+
+[[goal: protect | id: reputation | subject: HUSBAND | object: his reputation]]
+
+= She corners him at home and he runs out of places to hide.
+
+EXT. DRIVEWAY - DAY
+
+[[id: s31]]
+```
+
+10.4. A beat or goal is given an ID by an `id` field in its own note.
+
+10.5. IDs on sequences, scenes, and beats are optional in hand-written files. A goal MUST have an ID, because status notes and other goals refer to it. A goal's ID MAY be a plain word, such as `divorce`. A tool that needs an ID for an element that has none SHOULD assign one and write it to the file.
+
+10.6. IDs are not scene numbers. Fountain scene numbers (`#12#`) remain display numbers and MAY change between drafts. IDs do not change.
+
+## 11. Changes from v0.1
+
+11.1. In v0.1 a beat ended at the next scene heading. From v0.2 it does not (9.2, 9.3). A v0.1 file read under v0.2 has the same beats, but each may now extend past the end of its scene.
+
+11.2. In v0.1 a beat was undefined. Section 5 now defines it.
+
+## 12. Open questions
 
 These are undecided and feedback is welcome.
 
-- **What counts as a beat.** The specification does not define one, so two people marking the same scene will disagree on the count.
-- **Beats that turn mid-element.** A turn that happens halfway through a speech or paragraph can only be marked at the next element (7.3).
-- **Scenes that change location without a heading.** Cascade treats one scene heading as one scene.
-- **Units between sequence and scene.** Montages and intercuts contain several scene headings but act as one unit. There is no level for them.
-- **Layers within a scene.** Beats form a single line through a scene and cannot say that a beat belongs to a frame story or a second point of view.
+- **Sequence kinds.** Whether a sequence should record that it is a conflict or the creation of a goal, or whether tools should work that out from its goals.
+- **Which goal a beat belongs to.** When an agent holds several goals, a beat does not say which one is in play.
+- **Beats that turn mid-element.** A turn that happens halfway through a speech or paragraph can only be marked at the next element (9.4).
+- **Layers.** Beats form a single line through a sequence and cannot say that a beat belongs to a frame story or a second point of view.
 - **Partly marked files.** The last marked sequence runs to the end of the file or the next section. There is no way to end a sequence early.
-- **ID placement.** Whether scene IDs should reuse Fountain's scene-number syntax instead of a separate note.
-- **Levels below sequence.** Whether `Structure` should be able to name the scene and beat levels too.
+- **Scene IDs.** Whether scene IDs should reuse Fountain's scene-number syntax instead of a separate note.
 
 ## Appendix A. Fountain quick reference (informative)
 
