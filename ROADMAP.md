@@ -51,7 +51,7 @@ Mara sets down her bag. Smiles too quickly.
 
 Each Cascade note stands as its own paragraph, with a blank line above and below, so that Fountain's own rules for scene headings and dialogue are never disturbed.
 
-See [SPEC.md](SPEC.md) for the full v0.1 draft, [sample.fountain](sample.fountain) for a longer example, and [ROADMAP.md](ROADMAP.md) for what comes next.
+See [SPEC.md](SPEC.md) for the full v0.1 draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade, and [ROADMAP.md](ROADMAP.md) for what comes next.
 
 ## Implementations
 
@@ -60,5 +60,7 @@ See [SPEC.md](SPEC.md) for the full v0.1 draft, [sample.fountain](sample.fountai
 ## License
 
 The specification is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Anyone may implement it. See [LICENSE.md](LICENSE.md).
+
+The example screenplay *Moral Dilemma* is not covered by that license. It is included for reference only, and all rights to it are reserved.
 
 Fountain Cascade is an independent extension and is not affiliated with or endorsed by the authors of Fountain.
