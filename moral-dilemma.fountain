@@ -29,6 +29,7 @@ A game show TV set with a red box on the floor for the contestant to stand, a pl
 
                 NARRATOR
     Hello. What you are about to witness... hasn't happened yet. This is but one possible future—a world where overpopulation and scarcity have pushed humanity to desperate measures.
+
 Insert a series of quick visuals: barren supermarkets, overcrowded urban streets, and fields of dead crops under a gray sky. The visuals are harsh and unforgiving.
 
 [[beat: The world that made the show | id: b2]]
@@ -44,6 +45,7 @@ The scrolling faces on the plexiglass screen become sharper and more unsettling,
 
                 NARRATOR
     Welcome to *Moral Dilemma*, the brainchild of the enigmatic Archibald Feinious Duke. Here, contestants can trade the _lives_ of those they love for cold, hard cash. The more valuable the relationship, the greater the prize—but at what cost?
+
 The screen flickers with static, creating a ripple effect as if the broadcast is distorting. The world of the game show seems to bleed into the present day, giving the impression that something unnatural is occurring.
 
                 NARRATOR
@@ -53,6 +55,7 @@ The screen flickers with static, creating a ripple effect as if the broadcast is
 
                 NARRATOR
     See anyone you know?
+
 Screen flickers with static, creating a ripple effect as if the broadcast is distorting. The world of the game show seems to bleed into the present day, giving the impression that something unnatural is occurring.
 
 [[beat: How this future is reaching you | id: b4]]
@@ -61,6 +64,7 @@ Screen flickers with static, creating a ripple effect as if the broadcast is dis
 
                 NARRATOR
     You may wonder: how is this future reaching you, here and now? (considers) or should I say there and then? Perhaps it's a warning, or maybe... just a glimpse of what could be. We have twisted the threads of time so you are now witnesses to this harrowing spectacle.
+
 The camera zooms out, revealing the set in its entirety, the lights flashing in anticipation of the show’s beginning.
 
 [[beat: The question the show asks | id: b5]]
@@ -203,7 +207,7 @@ SUZIE, 20s, stands in the Red Box, clapping along with the audience.
     RIGHT!
 
                 SUZIE
-    I look at it that if I didn't get on the show, I got many people who can help me move! However, if THE Archibald comes to a knocking, I can turn them into cash![[Switch to be less confusing. 
+    I look at it that if I didn't get on the show, I got many people who can help me move! However, if THE Archibald comes to a knocking, I can turn them into cash!
 
                 ARCHIBALD
     Into what?
@@ -327,6 +331,7 @@ SUZIE, 20s, stands in the Red Box, clapping along with the audience.
 
                 ARCHIBALD
     Thomas, give her a taste.
+
 focuses on the victim board
 
 !The video starts as seen through a security camera.
@@ -551,6 +556,7 @@ insert ring opening up
 
                 DURAND
     She's not to cute to die!
+
 Image freezes
 
             >CUT BACK TO TV SET:
@@ -693,7 +699,7 @@ ARCHIBALD is standing beside SUZIE.
 [[beat: Suzie sells Nana for 325,000 | id: b31]]
 
                 ARCHIBALD
-    Let it not be said that Archibald Feinious Duke is a kind man. Your relationship with your nana is precious. You can walk away with the money and let her live out her few remaining weeks; maybe even months or earn an additional 325 thousand by letting your Nan be the next victim.[[Note: Add some doubt
+    Let it not be said that Archibald Feinious Duke is a kind man. Your relationship with your nana is precious. You can walk away with the money and let her live out her few remaining weeks; maybe even months or earn an additional 325 thousand by letting your Nan be the next victim.
 
 !A tear streams down Suzie's face, but she nods.
 
