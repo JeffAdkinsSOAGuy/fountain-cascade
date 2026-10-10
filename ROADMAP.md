@@ -1,64 +1,64 @@
-# Roadmap
+# Fountain Cascade
 
-This records what is planned after v0.1 and the design decisions already made, so they are not lost between versions. Nothing here is final until it appears in SPEC.md.
+Fountain Cascade is an extension of the [Fountain](https://fountain.io) screenplay syntax. It adds story structure above and below the scene, and (in later versions) a way for co-writers, including AI, to propose alternatives without overwriting the writer's text.
 
-## v0.2: Story spines
+**Status:** v0.1.1 draft. Expect changes.
 
-A spine is a named, ordered list of stages that parts of a script attach to. The Hero's Journey is one example.
+## What it adds
 
-Decisions so far:
+Fountain describes a script as scenes made of lines (action, dialogue, and so on). Cascade adds:
 
-- **Spine definitions live outside the script.** This repository will carry a small library of standard spines (Hero's Journey, Save the Cat, three-act, the Kenn Adams story spine).
-- **A script names its spine in the title page:** `Spine: heros-journey`.
-- **A custom spine is defined in the title page** using indented multi-line values:
+| Layer | Where it sits | Version |
+|---|---|---|
+| Sequence | Groups scenes | v0.1 |
+| Beat | Divides a scene | v0.1 |
+| Stable IDs | On sequences, scenes, and beats | v0.1 |
+| Story spine | An ordered template of stages (e.g. the Hero's Journey) that parts of the script attach to | v0.2 |
+| Alternatives | Proposed replacement text beside the original, with an author | v0.3 |
 
-  ```
-  Spine: custom
-      setup: The Lie She Lives
-      rupture: The House Is Sold
-  ```
+## Relationship to Fountain
 
-- **Stages attach by structured note** at the sequence, scene, or beat level: `[[stage: ordinary-world]]`, or as a field in a beat note: `[[beat: The letter arrives | stage: call-to-adventure]]`.
-- **Stages attach to units; they do not run until the next marker.** This allows overlap and out-of-order stages.
-- **Each stage has** an ID, a display name, and optionally a description and an expected position in the script.
+Fountain 1.1, as published at [fountain.io](https://fountain.io/syntax), is the authority on Fountain syntax. Cascade does not redefine or replace any of it. Anything Cascade does not mention behaves exactly as Fountain defines it.
 
-Undecided:
+## The one rule
 
-- Whether a script may use more than one spine, with stages written `[[stage: heros-journey/ordeal]]`.
+**Every Cascade file is a valid Fountain 1.1 file.**
 
-## v0.3: Alternatives
+Cascade keeps the `.fountain` extension and uses only constructs that existing Fountain tools already hide or ignore: sections, notes, boneyard comments, and title-page keys. A Cascade script opens, reads, and prints correctly in any Fountain tool. Those tools simply don't show the extra layers.
 
-A way for a co-writer, human or AI, to propose replacement text without overwriting the original.
+## Example
 
-Decisions so far:
+```
+Title: Example
+Structure: act, sequence
 
-- **The live text is the current choice.** Alternatives sit beside it in boneyard comments, which other Fountain tools hide:
+# Act One
 
-  ```
-  [[alt: a7]]
-  MARA
-  I already knew.
+## The Arrival
 
-  /* alt: b | author: claude | why: more defensive, hides the hurt
-  MARA
-  Who told you?
-  */
-  [[end-alt: a7]]
-  ```
+[[id: q1]]
 
-- **An AI co-writer may only add alternatives.** It never changes live text.
-- **Accepting swaps.** The chosen alternative becomes live and the previous original becomes an alternative.
-- **Modifying creates a new alternative** under the writer's name. The proposed version is kept.
-- **The smallest unit is one element:** a whole action paragraph or a whole dialogue block.
-- **The script holds only pending alternatives.** Rejected ones move to a sidecar file (working name `script.fountain.rejected`), recording the alt ID, text, author, the original it was offered against, the date, and an optional reason.
-- **The sidecar is optional.** Nothing in it is needed to read or print the script.
+INT. KITCHEN - DAY
 
-Undecided:
+[[id: s1]]
 
-- Whether superseded originals also go to the sidecar, marked `superseded`.
-- Whether the sidecar uses Fountain-style blocks or JSON.
+Boxes everywhere.
 
-## Later
+[[beat: Mara pretends she already knew | id: b1]]
 
-- **Structural proposals:** suggesting a moved scene, a cut sequence, or a split beat. Alternatives cannot express these.
-- **Threads:** through-lines such as an A-story, B-story, or character arc that run across non-adjacent scenes. Separate from spines.
+Mara sets down her bag. Smiles too quickly.
+```
+
+Each Cascade note stands as its own paragraph, with a blank line above and below, so that Fountain's own rules for scene headings and dialogue are never disturbed.
+
+See [SPEC.md](SPEC.md) for the full v0.1 draft, [sample.fountain](sample.fountain) for a longer example, and [ROADMAP.md](ROADMAP.md) for what comes next.
+
+## Implementations
+
+- FountainPen (editor, in development)
+
+## License
+
+The specification is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Anyone may implement it. See [LICENSE.md](LICENSE.md).
+
+Fountain Cascade is an independent extension and is not affiliated with or endorsed by the authors of Fountain.
