@@ -1,6 +1,6 @@
 # Fountain Cascade Specification
 
-**Version:** 0.3 (draft)
+**Version:** 0.3.1 (draft)
 **Date:** 2026-10-10
 **Extends:** Fountain 1.1 (https://fountain.io/syntax)
 
@@ -215,7 +215,17 @@ Here her secret goal comes into the open, and that creates his.
 
 8.8. A `secret` goal is hidden from its object. Other agents, and the audience, may know of it. `secret` therefore applies only to a goal whose object is an agent.
 
-8.9. The statuses are `secret`, `active`, `won`, `lost`, and `abandoned`. After `won`, `lost`, or `abandoned`, a goal is closed and MUST NOT change status again.
+8.9. The statuses are `secret`, `active`, `won`, `lost`, and `abandoned`. A status note MUST change the goal's status, and only these changes are allowed:
+
+| From | To |
+|---|---|
+| `secret` | `active`, `won`, `lost`, `abandoned` |
+| `active` | `won`, `lost`, `abandoned` |
+| `won`, `lost`, `abandoned` | nothing: the goal is closed |
+
+A goal that is in the open cannot become secret again. A closed goal is not reopened: if the agent takes the aim up again, that is a new goal, which MAY name the old one in its `from` field.
+
+8.9a. `from` MAY name a closed goal. `for` SHOULD name a goal that is still open when the new goal is declared.
 
 8.10. A status note MUST come after the declaration of the goal it names.
 
@@ -229,7 +239,7 @@ Here her secret goal comes into the open, and that creates his.
 He runs into the house and locks the door.
 ```
 
-9.2. A beat begins at its note. It ends at the next beat note or at the end of the sequence, whichever comes first. In a script with no sequences, it ends at the next beat note or the end of the file.
+9.2. A beat begins at its note. It ends at the next beat note, or where its sequence ends or pauses, whichever comes first. When a sequence resumes, the beat that was in progress when it paused does not pick up again: the resumed stretch needs a beat note of its own. In a script with no sequences, it ends at the next beat note or the end of the file.
 
 9.3. A scene heading does not end a beat. A beat MAY run through any number of scenes:
 
@@ -253,7 +263,7 @@ She puts in her key.
 
 9.4. A beat begins between elements. It cannot begin inside an action paragraph or inside a dialogue block.
 
-9.5. Content between the start of a sequence and its first beat note belongs to no beat.
+9.5. Content between the start of a sequence, or of a resumed stretch, and its first beat note belongs to no beat. A sequence in which agents are present SHOULD open with a beat.
 
 9.6. Beats do not nest.
 
@@ -334,13 +344,25 @@ EXT. DRIVEWAY - DAY
 
 11.6. IDs are not scene numbers. Fountain scene numbers (`#12#`) remain display numbers and MAY change between drafts. IDs do not change.
 
-## 12. Changes from earlier versions
+## 12. Conformance
 
-12.1. From v0.2 to v0.3: sequences may pause and resume (7.5); goals form a tree through `for` and may grow out of one another through `from` (8.6a); spines and stages are added (section 10); a plot may be written with no script text (5.11, 9.8). Every v0.2 file is a valid v0.3 file with the same meaning.
+12.1. This specification's repository publishes conformance cases in its `tests` directory.
 
-12.2. From v0.1 to v0.2: a beat no longer ends at the next scene heading (9.2, 9.3), and section 5 defines the terms. A v0.1 file read under a later version has the same beats, but each may extend past the end of its scene.
+12.2. The `format` cases each pair a Cascade file with a description of what it means. A tool that reads Cascade files SHOULD arrive at the same meaning for every case, and SHOULD report a problem on each line a case lists.
 
-## 13. Open questions
+12.3. The `analysis` cases each pair an unmarked excerpt with the marks a careful reader would add. They are for tools that propose marks. Analysis is a judgment, so these cases state what should match and do not require the same wording.
+
+12.4. Passing the cases does not by itself make a tool conform to this specification. The text of the specification governs.
+
+## 13. Changes from earlier versions
+
+13.1. From v0.3 to v0.3.1: the allowed status changes are listed (8.9); a beat is stated to end where its sequence pauses (9.2); a sequence with agents should open with a beat (9.5); conformance cases are added (section 12). A v0.3 file that reopened a goal's secrecy or repeated a status is now in error.
+
+13.2. From v0.2 to v0.3: sequences may pause and resume (7.5); goals form a tree through `for` and may grow out of one another through `from` (8.6a); spines and stages are added (section 10); a plot may be written with no script text (5.11, 9.8). Every v0.2 file is a valid v0.3 file with the same meaning.
+
+13.3. From v0.1 to v0.2: a beat no longer ends at the next scene heading (9.2, 9.3), and section 5 defines the terms. A v0.1 file read under a later version has the same beats, but each may extend past the end of its scene.
+
+## 14. Open questions
 
 These are undecided and feedback is welcome.
 

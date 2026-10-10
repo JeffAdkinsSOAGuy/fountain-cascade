@@ -2,7 +2,7 @@
 
 Fountain Cascade is an extension of the [Fountain](https://fountain.io) screenplay syntax. It adds story structure above and below the scene, and (in later versions) a way for co-writers, including AI, to propose alternatives without overwriting the writer's text.
 
-**Status:** v0.3 draft. Expect changes.
+**Status:** v0.3.1 draft. Expect changes.
 
 ## What it adds
 
@@ -59,7 +59,7 @@ I want a divorce.
 
 Each Cascade note stands as its own paragraph, with a blank line above and below, so that Fountain's own rules for scene headings and dialogue are never disturbed.
 
-See [SPEC.md](SPEC.md) for the full draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade, the [spines](spines) directory for the library of story arcs, and [ROADMAP.md](ROADMAP.md) for what comes next.
+See [SPEC.md](SPEC.md) for the full draft, [moral-dilemma.fountain](moral-dilemma.fountain) for a complete produced short film marked up with Cascade, the [spines](spines) directory for the library of story arcs, the [tests](tests) directory for conformance cases, and [ROADMAP.md](ROADMAP.md) for what comes next.
 
 ## Implementations
 

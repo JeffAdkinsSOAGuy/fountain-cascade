@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.3.1-draft (2026-10-10)
+
+Tightening after an outside review of v0.3.
+
+- Added: the allowed status changes, as a table. A goal in the open cannot become secret again, and a status note must change the status.
+- Clarified: a beat ends where its sequence pauses, and a resumed stretch needs a beat of its own.
+- Added: a sequence in which agents are present should open with a beat.
+- Added: conformance cases in `tests`. Eleven `format` cases pair a file with what it means, including which lines are in error. Five `analysis` cases pair an unmarked excerpt with the marks a careful reader would add.
+- Fixed: in `moral-dilemma.fountain`, Suzie's goal of cashing in Nana was marked won when she agreed. She never collects, so it is now marked lost when she is taken away.
+
 ## v0.3-draft (2026-10-10)
 
 Story arcs, and a goal model deep enough to plan a plot before writing it.
